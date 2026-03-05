@@ -33,7 +33,7 @@ class LoadMoreEventsHandler {
         
         error_log("Loading events: offset=$offset, limit=$limit, category=$category");
         
-        // Build filters
+        // Build filters with category
         $filters = [
             'limit' => $limit,
             'offset' => $offset,
@@ -41,7 +41,6 @@ class LoadMoreEventsHandler {
             'order' => 'ASC'
         ];
         
-        // 👇 ДОБАВЛЯЕМ КАТЕГОРИЮ В ФИЛЬТР
         if (!empty($category)) {
             $filters['tax_query'] = [
                 [
@@ -59,31 +58,10 @@ class LoadMoreEventsHandler {
         
         error_log('Found ' . count($events) . ' events');
         
-        // Render HTML
+        // 👇 ИСПОЛЬЗУЕМ ШАБЛОН
         ob_start();
         foreach ($events as $event) {
-            $date = $event->getFormattedDate();
-            $place = $event->getEventPlace();
-            $categories = $event->getCategories();
-            ?>
-            <div class="event-item">
-                <h3 class="event-title"><?php echo esc_html($event->getTitle()); ?></h3>
-                <div class="event-meta">
-                    <span class="event-date">📅 <?php echo esc_html($date); ?></span>
-                    <span class="event-place">📍 <?php echo esc_html($place); ?></span>
-                </div>
-                
-                <?php if (!empty($categories)): ?>
-                <div class="event-categories">
-                    <?php foreach ($categories as $cat): ?>
-                        <span class="event-category-tag">
-                            <?php echo esc_html($cat->name); ?>
-                        </span>
-                    <?php endforeach; ?>
-                </div>
-                <?php endif; ?>
-            </div>
-            <?php
+            include EM_PLUGIN_DIR . 'src/Templates/event-item.php';
         }
         $html = ob_get_clean();
         
