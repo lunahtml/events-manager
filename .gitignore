@@ -1,0 +1,28 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# WordPress
+wp-config.php
+wp-content/
+
+# Build
+/node_modules/
+/vendor/
+*.log
+*.lock
+
+# Assets
+assets/css/*.min.css
+assets/js/*.min.js
+assets/build/
+
+# Tests
+/tests/_output/
+/tests/_support/_generated/
+.phpunit.result.cache

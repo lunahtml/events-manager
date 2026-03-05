@@ -1,0 +1,18 @@
+{
+    "name": "events-manager",
+    "version": "1.0.0",
+    "description": "Frontend assets for Events Manager",
+    "main": "assets/js/events.js",
+    "scripts": {
+        "build": "npm run build:css && npm run build:js",
+        "build:css": "postcss assets/css/events.css --use autoprefixer cssnano --output assets/css/events.min.css",
+        "build:js": "uglifyjs assets/js/events.js --output assets/js/events.min.js --compress --mangle",
+        "watch": "npm run build -- --watch"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.27",
+        "cssnano": "^5.1.15",
+        "postcss-cli": "^9.1.0",
+        "uglify-js": "^3.19.3"
+    }
+}

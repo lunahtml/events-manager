@@ -1,0 +1,396 @@
+/* Events Manager Styles
+   Author: Anna
+   Version: 1.0.0
+*/
+
+:root {
+    --em-primary: #007cba;
+    --em-primary-hover: #005a87;
+    --em-text: #333;
+    --em-text-light: #666;
+    --em-border: #e0e0e0;
+    --em-bg-light: #f9f9f9;
+    --em-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --em-transition: all 0.3s ease;
+}
+
+/* Container */
+.events-manager-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Events Grid */
+.events-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Event Card */
+.event-item {
+    background: #fff;
+    border: 1px solid var(--em-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--em-transition);
+    animation: fadeIn 0.5s ease;
+}
+
+.event-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--em-shadow);
+}
+
+.event-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Event Image */
+.event-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.event-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.event-item:hover .event-thumbnail {
+    transform: scale(1.05);
+}
+
+/* Event Content */
+.event-content {
+    padding: 1.5rem;
+    position: relative;
+}
+
+.event-title {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.event-title a {
+    color: var(--em-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.event-title a:hover {
+    color: var(--em-primary);
+}
+
+/* Event Meta */
+.event-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: var(--em-text-light);
+    font-size: 0.95rem;
+}
+
+.event-date,
+.event-place {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.meta-icon {
+    font-size: 1.1rem;
+    min-width: 1.5rem;
+}
+
+/* Event Badge */
+.event-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: var(--em-primary);
+    color: #fff;
+}
+
+/* Load More Button */
+.events-load-more-wrapper {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.events-load-more-btn {
+    background: var(--em-primary);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--em-transition);
+    position: relative;
+    min-width: 200px;
+}
+
+.events-load-more-btn:hover:not(:disabled) {
+    background: var(--em-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--em-shadow);
+}
+
+.events-load-more-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.events-load-more-btn.loading .btn-text {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.events-load-more-btn.loading .btn-loader {
+    display: block !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Status Message */
+.events-status-message {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.events-status-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.events-status-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.events-status-message.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* No Events */
+.events-manager-no-events {
+    text-align: center;
+    padding: 3rem;
+    background: var(--em-bg-light);
+    border-radius: 12px;
+    color: var(--em-text-light);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .events-list {
+        grid-template-columns: 1fr;
+    }
+
+    .event-meta {
+        flex-direction: column;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .events-load-more-wrapper {
+        display: none;
+    }
+
+    .event-item {
+        break-inside: avoid;
+        border: none;
+        box-shadow: none;
+    }
+}
+
+/* Categories and Tags */
+.event-categories {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.event-category-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    font-size: 0.8em;
+    transition: all 0.2s ease;
+}
+
+.event-category-tag:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.event-category-tag a {
+    color: #333;
+    text-decoration: none;
+}
+
+.event-tags {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.event-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    background: #f0f0f0;
+    border-radius: 12px;
+    font-size: 0.75em;
+    border: 1px solid #ddd;
+}
+
+.event-tag a {
+    color: #666;
+    text-decoration: none;
+}
+
+.event-tag:hover {
+    background: #e0e0e0;
+}
+
+/* Category filter in admin */
+.event-category-checkbox {
+    margin-right: 5px;
+}
+
+/* Category colors */
+.event-category-tag[data-category="conferences"] {
+    background: #4CAF50;
+    color: white;
+}
+
+.event-category-tag[data-category="workshops"] {
+    background: #2196F3;
+    color: white;
+}
+
+.event-category-tag[data-category="webinars"] {
+    background: #9C27B0;
+    color: white;
+}
+
+/* Event Map */
+.event-map-container {
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-map {
+    height: 300px;
+    width: 100%;
+}
+
+/* Map settings in admin */
+.events-map-settings {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.events-map-settings .form-table th {
+    width: 200px;
+}
+
+.events-map-settings input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Single Event Template */
+.single-event .event-meta-header {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.single-event .event-meta-header span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.single-event .entry-header {
+    margin-bottom: 30px;
+}
+
+.single-event .post-thumbnail {
+    margin-bottom: 20px;
+}
+
+.single-event .post-thumbnail img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.single-event .entry-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}

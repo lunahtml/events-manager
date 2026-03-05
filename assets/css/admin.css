@@ -1,0 +1,39 @@
+.event-details-metabox {
+    background: #fff;
+    border-radius: 4px;
+}
+
+.event-details-metabox .field-row {
+    border-bottom: 1px solid #f0f0f1;
+    padding: 15px 0;
+}
+
+.event-details-metabox .field-row:last-child {
+    border-bottom: none;
+}
+
+.event-details-metabox label {
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.event-details-metabox input[type="date"],
+.event-details-metabox input[type="text"] {
+    transition: all 0.2s ease;
+}
+
+.event-details-metabox input[type="date"]:hover,
+.event-details-metabox input[type="text"]:hover {
+    border-color: #2271b1;
+}
+
+/* Fix for date input in different browsers */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}

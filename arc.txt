@@ -1,0 +1,105 @@
+events-manager/
+├── events-manager.php                 (главный файл плагина)
+├── uninstall.php                       (очистка при удалении)
+├── composer.json                       (автолоадинг)
+├── README.md                           
+├── .gitignore
+├── src/
+│   ├── Core/
+│   │   ├── Plugin.php                   (ядро плагина)
+│   │   ├── Loader.php                    (автозагрузка)
+│   │   └── Activator.php                 (активация)
+│   ├── PostTypes/
+│   │   └── EventPostType.php             (регистрация CPT)
+│   ├── Admin/
+│   │   ├── Settings/
+│   │       ├── MapSettings.php
+│   │   ├── MetaBoxes/
+│   │       ├── views/
+│   │           ├── event-details-metabox.php
+│   │   │   └── EventDetailsMetabox.php   (метабокс)
+│   │   └── AdminAssets.php                (админские ассеты)
+│   ├── Frontend/
+│   │   ├── Map/
+│   │       ├── EventMap.php
+│   │   ├── Shortcodes/
+│   │   │   └── EventsListShortcode.php   (шорткод)
+│   │   ├── Ajax/
+│   │   │   └── LoadMoreEventsHandler.php (AJAX обработчик)
+│   │   └── Assets/
+│   │       ├── Css/
+│   │       │   └── EventsStyles.php       (регистрация CSS)
+│   │       └── Js/
+│   │           └── EventsScripts.php      (регистрация JS)
+│   ├── Database/
+│   │   ├── Models/
+│   │   │   └── EventModel.php             (модель события)
+│   │   └── Repositories/
+│   │       └── EventRepository.php        (репозиторий)
+│   ├── Templates/
+│   │   ├── event-list.php                 (шаблон списка)
+│   │   └── event-item.php                 (шаблон элемента)
+│   │   └── single-event.php                (шаблон элемента)
+│   └── Helpers/
+│       └── DateHelper.php                 (хелпер для дат)
+├── assets/
+│   ├── css/
+│   │   ├── admin.css                     (основной CSS)
+│   │   ├── events-manager.css                      (основной CSS)
+│   │   └── events.min.css                   (минифицированный)
+│   ├── js/
+│   │   ├── events-manager.js                        (основной JS)
+│   │   └── events.min.js                     (минифицированный)
+│   │   └── admin.js              
+│   │   └── events-map.js             
+│   └── build/                                (сборка)
+├── node_modules/                         
+├── languages/                                (переводы)
+├── tests/                                     (тесты)
+├── vendor/                                    (зависимости)
+└── package.json                               (для фронтенд сборки)
+
+
+
+
+Тестовое задание для WordPress-разработчика (Middle / Middle+)
+
+
+Необходимо разработать небольшое плагин-расширение для WordPress, которое добавляет кастомный тип записей и интерфейс для работы с ним на фронтенде. Не использовать готовые плагины типа ACF/Metaboxes/Pods. Только нативные API ядра WordPRess.
+
+Задание:
+
+Создать мини‑плагин  Events Manager , реализующий следующий функционал:
+1. Backend (PHP / WordPress API)
+ - Зарегистрировать кастомный тип записей  event  с полями:
+ - Название (title)
+ - Дата события (meta‑поле  event_date )
+ - Место проведения (meta‑поле  event_place )
+ - Добавить метабокс в админке для ввода этих дополнительных полей.
+2. Shortcode
+ - Реализовать шорткод  events_list , который выводит список ближайших событий (только те, у которых дата >= текущей).
+ - Для каждого события вывести:
+ - Название
+ - Дата (в формате  дд.мм.гггг )
+ - Место проведения
+3. Frontend (JS / CSS)
+ - Добавить кнопку “Показать больше”, которая загружает следующие 3 события без перезагрузки страницы. Реализовать через  wp_ajax  /  wp_ajax_nopriv  и JavaScript (fetch или jQuery AJAX).
+ - Добавить минимальное оформление списка (CSS), чтобы проверить базовые стили.
+
+Дополнительно (для Middle+)
+ - Вывести Яндекс или Гугл-карту
+ - Сделать сортировку по дате (сначала ближайшие события).
+ - Защитить AJAX‑обработчик с помощью  wp_nonce .
+ - Реализовать вывод дат с учетом часового пояса из настроек WordPress.
+
+Критерии оценки
+
+ - Корректная регистрация кастомного типа записей и метаполей.
+ - Правильное использование хуков  init ,  add_meta_boxes ,  save_post .
+ - Рабочий AJAX‑функционал (проверка front и back).
+ - Чистый, структурированный код (PHP, JS, CSS).
+ - Умение использовать встроенные WordPress API без избыточности.
+
+Формат: открытая ссылка на гитхаб/гитлаб
+Срок: 2 рабочих дня
+
